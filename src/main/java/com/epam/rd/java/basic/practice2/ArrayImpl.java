@@ -21,7 +21,9 @@ public class ArrayImpl implements Array {
 
 	@Override
     public void clear() {
-	    data=null;
+	    for (int i=0;i<data.length;i++) {
+	        data[i]=null;
+        };
         
     }
 
@@ -110,6 +112,10 @@ public class ArrayImpl implements Array {
         System.out.println(array.get(1));
         System.out.println(array.size());
         System.out.println(array.indexOf(10));
+        System.out.println(array);
+        array.remove(3);
+        System.out.println(array);
+        array.clear();
         System.out.println(array);
 
 

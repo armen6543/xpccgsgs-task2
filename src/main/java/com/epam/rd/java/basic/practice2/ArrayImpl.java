@@ -7,41 +7,42 @@ public class ArrayImpl implements Array {
     private int count;
 
 
-
-    public ArrayImpl () {
-       this.data=new Object[10];
-       this.count=0;
+    public ArrayImpl() {
+        this.data = new Object[10];
+        this.count = 0;
 
     }
-    public ArrayImpl (int a) {
-        this.data=new Object[a];
-        this.count=0;
+
+    public ArrayImpl(int a) {
+        this.data = new Object[a];
+        this.count = 0;
     }
 
 
-	@Override
+    @Override
     public void clear() {
-	    for (int i=0;i<data.length;i++) {
-	        data[i]=null;
-        };
-        
+        for (int i = 0; i < data.length; i++) {
+            data[i] = null;
+        }
+        count=0;
+
     }
 
-	@Override
+    @Override
     public int size() {
         return data.length;
     }
-	
-	@Override
+
+    @Override
     public Iterator<Object> iterator() {
-	    return new IteratorImpl();
+        return new IteratorImpl();
     }
-	
-	private class IteratorImpl implements Iterator<Object> {
+
+    private class IteratorImpl implements Iterator<Object> {
 
         @Override
         public boolean hasNext() {
-            return (count<data.length);
+            return (count < data.length);
         }
 
         @Override
@@ -50,69 +51,82 @@ public class ArrayImpl implements Array {
         }
 
     }
-	
-	@Override
-    public void add(Object element) {
-        if(count<data.length) {
-            this.data[count] = element;
-            count++;}
-        else if(count==data.length) {
-            Object [] arr2=new Object[data.length+1];
-            System.arraycopy(data, 0, arr2, 0, data.length);
-            arr2[arr2.length-1]=element;
-            data=arr2;
-            count++;}
-    }
 
-	@Override
-    public void set(int index, Object element) {
-        if (index<count) {
-        data[index]=element;}
-        else if (index>=count) {
-            data[index]=element;
+    @Override
+    public void add(Object element) {
+        if (count < data.length) {
+            this.data[count] = element;
+            count++;
+        } else if (count == data.length) {
+            Object[] arr2 = new Object[data.length + 1];
+            System.arraycopy(data, 0, arr2, 0, data.length);
+            arr2[arr2.length - 1] = element;
+            data = arr2;
             count++;
         }
-        
     }
 
-	@Override
+    @Override
+    public void set(int index, Object element) {
+        if (index < count) {
+            data[index] = element;
+        } else if (index >= count) {
+            data[index] = element;
+            count++;
+        }
+
+    }
+
+    @Override
     public Object get(int index) {
         return data[index];
     }
 
-	@Override
+    @Override
     public int indexOf(Object element) {
-        int index=0;
-            for (int i = 0; i < data.length; i++) {
-                if (element.equals(data[i]))  index=i; }
-        return index;
+        Object[] es = data;
+        if (element == null) {
+            for (int i = 0; i < es.length; i++) {
+                if (es[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < es.length; i++) {
+                if (element.equals(es[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
 
-	@Override
+    @Override
     public void remove(int index) {
-        data[index]=null;
-        
+        data[index] = null;
+        count--;
+
     }
 
     @Override
     public String toString() {
-        StringBuilder s=new StringBuilder();
+        StringBuilder s = new StringBuilder();
         s.append("[");
-        for (int i=0;i<data.length-1;i++) {
-            s.append(data[i]+", ");
+        for (int i = 0; i < data.length - 1; i++) {
+            s.append(data[i] + ", ");
         }
-        s.append(data[data.length-1]);
+        s.append(data[data.length - 1]);
         s.append("]");
         return s.toString();
     }
 
     public static void main(String[] args) {
-	    Array array=new ArrayImpl();
-	    array.add(3);
-	    array.add(5);
-	    array.add(10);
-	    array.set(3,20);
+        Array array = new ArrayImpl();
+        array.add(3);
+        array.add(5);
+        array.add(10);
+        array.set(3, 20);
         array.add(10);
         array.add(10);
         array.add(10);
@@ -120,6 +134,7 @@ public class ArrayImpl implements Array {
         array.add(10);
         array.add(10);
         array.add(10);
+        array.add(30);
 
         System.out.println(array);
 
@@ -131,11 +146,6 @@ public class ArrayImpl implements Array {
         System.out.println(array);
         array.clear();
         System.out.println(array);
-
-
-
-
-
 
 
     }

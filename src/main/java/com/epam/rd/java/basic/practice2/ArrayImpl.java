@@ -53,23 +53,25 @@ public class ArrayImpl implements Array {
 	
 	@Override
     public void add(Object element) {
-        if (!iterator().hasNext()) {
+        if(count<data.length) {
+            this.data[count] = element;
+            count++;}
+        else if(count==data.length) {
             Object [] arr2=new Object[data.length+1];
-            for (int i=0;i<data.length;i++) {
-                arr2[i]=data[i];
-            }
-            arr2[data.length+1]=element;
+            System.arraycopy(data, 0, arr2, 0, data.length);
+            arr2[arr2.length-1]=element;
             data=arr2;
-        } else {
-        this.data[count] = element;
-        count++;}
-
-        
+            count++;}
     }
 
 	@Override
     public void set(int index, Object element) {
-        data[index]=element;
+        if (index<count) {
+        data[index]=element;}
+        else if (index>=count) {
+            data[index]=element;
+            count++;
+        }
         
     }
 
@@ -80,17 +82,12 @@ public class ArrayImpl implements Array {
 
 	@Override
     public int indexOf(Object element) {
-        if (element == null) {
-            for (int i = 0; i < data.length; i++)
-                if (data[i]==null)
-                    return i;
-        } else {
-            for (int i = 0; i < data.length; i++)
-                if (element.equals(data[i]))
-                    return i;
-        }
-        return -1;
+        int index=0;
+            for (int i = 0; i < data.length; i++) {
+                if (element.equals(data[i]))  index=i; }
+        return index;
     }
+
 
 	@Override
     public void remove(int index) {
@@ -116,6 +113,16 @@ public class ArrayImpl implements Array {
 	    array.add(5);
 	    array.add(10);
 	    array.set(3,20);
+        array.add(10);
+        array.add(10);
+        array.add(10);
+        array.add(10);
+        array.add(10);
+        array.add(10);
+        array.add(10);
+
+        System.out.println(array);
+
         System.out.println(array.get(1));
         System.out.println(array.size());
         System.out.println(array.indexOf(10));

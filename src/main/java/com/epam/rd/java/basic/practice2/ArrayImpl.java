@@ -53,8 +53,16 @@ public class ArrayImpl implements Array {
 	
 	@Override
     public void add(Object element) {
+        if (!iterator().hasNext()) {
+            Object [] arr2=new Object[data.length+1];
+            for (int i=0;i<data.length;i++) {
+                arr2[i]=data[i];
+            }
+            arr2[data.length+1]=element;
+            data=arr2;
+        } else {
         this.data[count] = element;
-        count++;
+        count++;}
 
         
     }
@@ -95,12 +103,11 @@ public class ArrayImpl implements Array {
         StringBuilder s=new StringBuilder();
         s.append("[");
         for (int i=0;i<data.length-1;i++) {
-            s.append(data[i]+" ");
+            s.append(data[i]+", ");
         }
         s.append(data[data.length-1]);
         s.append("]");
-        String s1=s.toString();
-        return s1;
+        return s.toString();
     }
 
     public static void main(String[] args) {

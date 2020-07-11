@@ -30,7 +30,7 @@ public class ArrayImpl implements Array {
 
     @Override
     public int size() {
-        return data.length;
+        return count;
     }
 
     @Override
@@ -129,12 +129,7 @@ public class ArrayImpl implements Array {
         array.set(3, 20);
         array.add(10);
         array.add(10);
-        array.add(10);
-        array.add(10);
-        array.add(10);
-        array.add(10);
-        array.add(10);
-        array.add(30);
+
 
         System.out.println(array);
 

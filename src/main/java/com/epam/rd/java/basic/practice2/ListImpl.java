@@ -11,7 +11,7 @@ public class ListImpl implements List {
     public ListImpl() {
         last = null;
         first = null;
-        count=0;
+        count = 0;
     }
 
     private static class Node {
@@ -51,7 +51,7 @@ public class ListImpl implements List {
 
     private class IteratorImpl implements Iterator<Object> {
         private ListImpl.Node lastReturned;
-        private ListImpl.Node  next;
+        private ListImpl.Node next;
         private int nextIndex;
 
         @Override
@@ -77,7 +77,7 @@ public class ListImpl implements List {
         final Node currFirst = first;
         final Node newNode = new Node(null, element, currFirst);
         first = newNode;
-        if(currFirst == null)
+        if (currFirst == null)
             last = newNode;
         else
             currFirst.previous = newNode;
@@ -88,9 +88,9 @@ public class ListImpl implements List {
     @Override
     public void addLast(Object element) {
         final Node currLast = last;
-        final Node newNode = new Node(currLast,element, null);
+        final Node newNode = new Node(currLast, element, null);
         last = newNode;
-        if(currLast == null)
+        if (currLast == null)
             first = newNode;
         else
             currLast.next = newNode;
@@ -134,7 +134,7 @@ public class ListImpl implements List {
 
     @Override
     public Object getFirst() {
-        final ListImpl.Node  f = first;
+        final ListImpl.Node f = first;
         if (f == null)
             throw new NoSuchElementException();
         return f.element;
@@ -216,8 +216,11 @@ public class ListImpl implements List {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("[");
-        for (ListImpl.Node x = first; x != null; x = x.next)
-            s.append(x.element+ ", ");
+        for (ListImpl.Node x = first; x != null; x = x.next) {
+            s.append(x.element);
+            if (x.next == null) break;
+            s.append(", ");
+        }
         s.append("]");
         return s.toString();
     }

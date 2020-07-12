@@ -14,6 +14,7 @@ public class ArrayImplTest {
         Object s=array.get(1);
         Assert.assertEquals(3,s);
 
+
     }
 
 

@@ -1,7 +1,6 @@
 package com.epam.rd.java.basic.practice2;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -57,8 +56,6 @@ public class ArrayImpl implements Array {
             if (i >= count)
                 throw new NoSuchElementException();
             Object[] elementData = data;
-            if (i >= elementData.length)
-                throw new ConcurrentModificationException();
             cursor = i + 1;
             return (Object) elementData[lastRet = i];
         }
@@ -124,6 +121,7 @@ public class ArrayImpl implements Array {
         if ((newSize = count - 1) > index)
             System.arraycopy(es, index + 1, es, index, newSize -index);
         es[count = newSize] = null;
+        count--;
 
 
     }

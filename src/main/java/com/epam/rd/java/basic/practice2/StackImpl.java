@@ -7,8 +7,8 @@ public class StackImpl implements Stack {
     private int count;
 
     public StackImpl(int max) {
-        stackArray = new Object[max];
-        count = 0;
+        this.stackArray = new Object[max];
+        this.count = 0;
     }
 
     @Override

@@ -3,14 +3,13 @@ package com.epam.rd.java.basic.practice2;
 import java.util.Iterator;
 
 public class StackImpl implements Stack {
-    private int maxSize;
-    private Object[] stackArray;
+    private final Object[] stackArray;
     private int count;
 
     public StackImpl(int max) {
-        this.maxSize = max;
-        stackArray = new Object[maxSize];
-        count = 0;}
+        stackArray = new Object[max];
+        count = 0;
+    }
 
     @Override
     public void clear() {

@@ -135,18 +135,18 @@ public class ListImpl implements List {
     @Override
     public Object getFirst() {
         final ListImpl.Node f = first;
-        if (f == null)
-            throw new NoSuchElementException();
-        return f.element;
+        //if (f == null)
+            //throw new NoSuchElementException();
+        return f;
     }
 
 
     @Override
     public Object getLast() {
         final ListImpl.Node l = last;
-        if (l == null)
-            throw new NoSuchElementException();
-        return l.element;
+        //if (l == null)
+            //throw new NoSuchElementException();
+        return l;
     }
 
     @Override
@@ -251,7 +251,10 @@ public class ListImpl implements List {
         list.remove(23);
         System.out.println(list);
         System.out.println(list.size());
-        System.out.println(list.search(12));
+        list.clear();
+        System.out.println(list);
+        System.out.println(list.getFirst());
+        System.out.println(list.getLast());
 
     }
 }

@@ -135,18 +135,18 @@ public class ListImpl implements List {
     @Override
     public Object getFirst() {
         final ListImpl.Node f = first;
-        //if (f == null)
-            //throw new NoSuchElementException();
-        return f;
+        if (f == null)
+            return null;
+        return f.element;
     }
 
 
     @Override
     public Object getLast() {
         final ListImpl.Node l = last;
-        //if (l == null)
-            //throw new NoSuchElementException();
-        return l;
+        if (l == null)
+            return null;
+        return l.element;
     }
 
     @Override

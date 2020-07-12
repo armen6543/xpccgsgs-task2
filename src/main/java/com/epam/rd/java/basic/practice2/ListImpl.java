@@ -1,6 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ListImpl implements List {
@@ -151,6 +152,21 @@ public class ListImpl implements List {
 
     @Override
     public Object search(Object element) {
+
+        int index = 0;
+        if (element == null) {
+            for (ListImpl.Node  x = first; x != null; x = x.next) {
+                if (x.element == null)
+                    return index;
+                index++;
+            }
+        } else {
+            for (ListImpl.Node  x = first; x != null; x = x.next) {
+                if (element.equals(x.element))
+                    return x.element;
+                index++;
+            }
+        }
         return null;
     }
 
@@ -230,11 +246,13 @@ public class ListImpl implements List {
         ListImpl list = new ListImpl();
         list.addLast(45);
         list.addFirst(23);
+        list.addFirst(67);
         System.out.println(list);
         System.out.println(list.size());
         list.remove(23);
         System.out.println(list);
         System.out.println(list.size());
+        System.out.println(list.search(12));
 
     }
 }

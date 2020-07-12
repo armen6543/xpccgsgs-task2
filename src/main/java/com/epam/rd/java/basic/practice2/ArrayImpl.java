@@ -1,6 +1,9 @@
 package com.epam.rd.java.basic.practice2;
 
+import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayImpl implements Array {
     private Object[] data;
@@ -39,15 +42,25 @@ public class ArrayImpl implements Array {
     }
 
     private class IteratorImpl implements Iterator<Object> {
+        int cursor;
+        int lastRet = -1;
+
 
         @Override
         public boolean hasNext() {
-            return (count < data.length);
+            return (cursor != count);
         }
 
         @Override
         public Object next() {
-            return data[count++];
+            int i = cursor;
+            if (i >= count)
+                throw new NoSuchElementException();
+            Object[] elementData = data;
+            if (i >= elementData.length)
+                throw new ConcurrentModificationException();
+            cursor = i + 1;
+            return (Object) elementData[lastRet = i];
         }
 
     }
@@ -104,8 +117,14 @@ public class ArrayImpl implements Array {
 
     @Override
     public void remove(int index) {
-        data[index] = null;
-        count--;
+        final Object[] es = data;
+
+        Object oldValue = (Object) es[index];
+        final int newSize;
+        if ((newSize = count - 1) > index)
+            System.arraycopy(es, index + 1, es, index, newSize -index);
+        es[count = newSize] = null;
+
 
     }
 
@@ -138,8 +157,6 @@ public class ArrayImpl implements Array {
         System.out.println(array.indexOf(10));
         System.out.println(array);
         array.remove(3);
-        System.out.println(array);
-        array.clear();
         System.out.println(array);
 
 

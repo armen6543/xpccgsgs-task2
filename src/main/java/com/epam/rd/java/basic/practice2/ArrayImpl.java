@@ -121,7 +121,6 @@ public class ArrayImpl implements Array {
         if ((newSize = count - 1) > index)
             System.arraycopy(es, index + 1, es, index, newSize -index);
         es[count = newSize] = null;
-        count--;
 
 
     }
@@ -156,6 +155,7 @@ public class ArrayImpl implements Array {
         System.out.println(array);
         array.remove(3);
         System.out.println(array);
+        System.out.println(array.size());
 
 
     }

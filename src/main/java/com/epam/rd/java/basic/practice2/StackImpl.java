@@ -3,8 +3,12 @@ package com.epam.rd.java.basic.practice2;
 import java.util.Iterator;
 
 public class StackImpl implements Stack {
-    private final Object[] stackArray;
+    private  Object[] stackArray;
     private int count;
+
+    public StackImpl() {
+        this.stackArray = new Object[10];
+        this.count = 0;}
 
     public StackImpl(int max) {
         this.stackArray = new Object[max];
@@ -75,7 +79,7 @@ public class StackImpl implements Stack {
     }
 
     public static void main(String[] args) {
-        StackImpl stack=new StackImpl(10);
+        StackImpl stack=new StackImpl();
         stack.push(34);
         stack.push(56);
         System.out.println(stack);

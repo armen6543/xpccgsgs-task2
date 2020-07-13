@@ -57,7 +57,7 @@ public class ArrayImpl implements Array {
                 throw new NoSuchElementException();
             Object[] elementData = data;
             cursor = i + 1;
-            return (Object) elementData[lastRet = i];
+            return  elementData[lastRet = i];
         }
 
     }

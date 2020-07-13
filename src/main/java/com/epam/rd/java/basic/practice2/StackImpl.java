@@ -35,24 +35,28 @@ public class StackImpl implements Stack {
 
     private class IteratorImpl implements Iterator<Object> {
 
-        int cursor;
+        //int cursor;
+        int cursor=count-1;
         int lastRet = -1;
 
         @Override
         public boolean hasNext() {
-           // return (count1 < count);
-            return (cursor != count);
+
+            //return (cursor != count);
+            return (cursor != -1);
         }
 
         @Override
         public Object next() {
 
             int i = cursor;
-            if (i >= count)
-                throw new NoSuchElementException();
+            //if (i >= count)
+                //throw new NoSuchElementException();
             Object[] elementData = stackArray;
-            cursor = i + 1;
-            return (Object) elementData[lastRet = i];
+           // cursor = i + 1;
+            cursor = i - 1;
+
+            return  elementData[lastRet = i];
         }
 
     }
@@ -85,17 +89,31 @@ public class StackImpl implements Stack {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("[");
-        for (int i = 0; i < stackArray.length; i++) {
-            if (i == stackArray.length - 1) {
-                s.append(stackArray[stackArray.length - 1]);
-                break;
-            }
-            s.append(stackArray[i] + ", ");
+       // StringBuilder s = new StringBuilder();
+       //// s.append("[");
+       // for (int i = 0; i < stackArray.length; i++) {
+           // if (i == stackArray.length - 1) {
+              //  s.append(stackArray[stackArray.length - 1]);
+               // break;
+           // }
+          //  s.append(stackArray[i] + ", ");
+      //  }
+       // s.append("]");
+       // return s.toString();
+        if (stackArray == null)
+            return "null";
+        int iMax = stackArray.length - 1;
+        if (iMax == -1)
+            return "[]";
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; ; i++) {
+            b.append(stackArray[i]);
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
         }
-        s.append("]");
-        return s.toString();
     }
 
     public static void main(String[] args) {
@@ -110,9 +128,8 @@ public class StackImpl implements Stack {
         System.out.println(stack.pop());
         System.out.println(stack);
 
-        Iterator<Object> iterator=stack.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        for (Object o : stack) {
+            System.out.print((o)+" ");
         }
 
 

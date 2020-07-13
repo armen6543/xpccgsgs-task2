@@ -175,7 +175,6 @@ public class ListImpl implements List {
         if (element == null) {
             for (ListImpl.Node x = first; x != null; x = x.next) {
                 if (x.element == null) {
-                    final Object el = x.element;
                     final ListImpl.Node next = x.next;
                     final ListImpl.Node prev = x.previous;
 
@@ -252,10 +251,7 @@ public class ListImpl implements List {
         list.remove(23);
         System.out.println(list);
         System.out.println(list.size());
-        //ist.clear();
-        //System.out.println(list);
-        //System.out.println(list.getFirst());
-       // System.out.println(list.getLast());
+
         Iterator<Object> iterator = list.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());

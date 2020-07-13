@@ -82,7 +82,7 @@ public class QueueImpl implements Queue {
     @Override
     public Object dequeue() {
         if (head == null) {
-            throw new NoSuchElementException("No more elements");
+            return null;
         }
 
         Object retval = head.object;
@@ -100,7 +100,7 @@ public class QueueImpl implements Queue {
     @Override
     public Object top() {
         if (head == null) {
-            throw new NoSuchElementException("No more elements");
+            return null;
         }
 
         return head.object;

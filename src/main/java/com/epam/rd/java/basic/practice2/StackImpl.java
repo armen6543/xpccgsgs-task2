@@ -1,7 +1,6 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class StackImpl implements Stack {
     private Object[] stackArray;
@@ -35,14 +34,12 @@ public class StackImpl implements Stack {
 
     private class IteratorImpl implements Iterator<Object> {
 
-        //int cursor;
         int cursor=count-1;
         int lastRet = -1;
 
         @Override
         public boolean hasNext() {
 
-            //return (cursor != count);
             return (cursor != -1);
         }
 
@@ -50,10 +47,9 @@ public class StackImpl implements Stack {
         public Object next() {
 
             int i = cursor;
-            //if (i >= count)
-                //throw new NoSuchElementException();
+
             Object[] elementData = stackArray;
-           // cursor = i + 1;
+
             cursor = i - 1;
 
             return  elementData[lastRet = i];
@@ -132,8 +128,6 @@ public class StackImpl implements Stack {
             System.out.print((o)+" ");
         }
         System.out.println();
-        //stack.push(73);
-        //stack.push(65);
         System.out.println(stack);
         System.out.println(stack);
 

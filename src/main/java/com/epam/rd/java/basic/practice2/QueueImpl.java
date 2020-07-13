@@ -42,24 +42,23 @@ public class QueueImpl implements Queue {
     }
 
     private class IteratorImpl implements Iterator<Object> {
-        private QueueImpl.QNode lastReturned;
-        private QueueImpl.QNode  next;
-        private int nextIndex;
+
+        QNode current = head;
 
         @Override
         public boolean hasNext() {
-            return nextIndex < count;
+            return current != null;
         }
 
         @Override
         public Object next() {
-            if (!hasNext())
-                throw new NoSuchElementException();
 
-            lastReturned = next;
-            next = next.next;
-            nextIndex++;
-            return lastReturned.object;
+            if (hasNext()) {
+                Object data = current.object;
+                current = current.next;
+                return data;
+            }
+            return null;
         }
 
     }
@@ -120,10 +119,14 @@ public class QueueImpl implements Queue {
         queue.enqueue(34);
         queue.enqueue(56);
 
-        System.out.println(queue);
-        System.out.println(queue.size());
-        System.out.println(queue.top());
+        //System.out.println(queue);
+       // System.out.println(queue.size());
+        //System.out.println(queue.top());
+        Iterator<Object> iterator = queue.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+
+        }
 
     }
-
 }

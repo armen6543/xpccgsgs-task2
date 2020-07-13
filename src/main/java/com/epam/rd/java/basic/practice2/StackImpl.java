@@ -27,21 +27,22 @@ public class StackImpl implements Stack {
     public int size() {
         return count;
     }
-
+    @Override
     public Iterator<Object> iterator() {
         return new IteratorImpl();
     }
 
     private class IteratorImpl implements Iterator<Object> {
+        int count1 = 0;
 
         @Override
         public boolean hasNext() {
-            return (count < stackArray.length);
+            return (count1 < count);
         }
 
         @Override
         public Object next() {
-            return stackArray[count++];
+            return stackArray[count1++];
         }
 
     }
@@ -57,12 +58,7 @@ public class StackImpl implements Stack {
     public Object pop() {
         Object obj;
 
-        //int len = size();
         obj = top();
-        //int j = count - (len - 1) - 1;
-        //if (j > 0) {
-            //System.arraycopy(stackArray, len, stackArray, len - 1, j);
-        //}
 
         count--;
         stackArray[count] = null;
@@ -103,9 +99,11 @@ public class StackImpl implements Stack {
         System.out.println(stack.top());
         System.out.println(stack.pop());
         System.out.println(stack);
-        System.out.println(stack.top());
-        stack.clear();
-        System.out.println(stack);
+
+        Iterator<Object> iterator=stack.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
 
 
     }

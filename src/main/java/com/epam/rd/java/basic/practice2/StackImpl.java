@@ -56,19 +56,17 @@ public class StackImpl implements Stack {
 
     @Override
     public Object pop() {
+        Object obj;
 
-        int index = size()-1;
-        Object   obj= stackArray[index];
+        int len = size();
+        obj=top();
+        int j = count - (len-1) - 1;
+        if (j > 0) {
+            System.arraycopy(stackArray, (len-1) + 1, stackArray, len-1, j);
+        }
 
-        stackArray[index]=null;
         count--;
-
-
-        //int j = count - index - 1;
-        //if (j > 0) {
-            //System.arraycopy(stackArray, index + 1, stackArray, index, j);
-
-        //}
+        stackArray[count] = null;
         return obj;
     }
 
@@ -81,10 +79,12 @@ public class StackImpl implements Stack {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("[");
-        for (int i = 0; i < stackArray.length - 1; i++) {
+        for (int i = 0; i < stackArray.length; i++) {
+            if (i==stackArray.length-1) {
+               s.append(stackArray[stackArray.length - 1]);
+               break;}
             s.append(stackArray[i] + ", ");
         }
-        s.append(stackArray[stackArray.length - 1]);
         s.append("]");
         return s.toString();
     }
@@ -101,6 +101,9 @@ public class StackImpl implements Stack {
         System.out.println(stack.pop());
         System.out.println(stack);
         System.out.println(stack.top());
+        stack.clear();
+        System.out.println(stack);
+
 
 
 

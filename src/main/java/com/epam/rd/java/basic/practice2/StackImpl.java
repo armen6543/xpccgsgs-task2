@@ -3,12 +3,13 @@ package com.epam.rd.java.basic.practice2;
 import java.util.Iterator;
 
 public class StackImpl implements Stack {
-    private  Object[] stackArray;
+    private Object[] stackArray;
     private int count;
 
     public StackImpl() {
         this.stackArray = new Object[10];
-        this.count = 0;}
+        this.count = 0;
+    }
 
     public StackImpl(int max) {
         this.stackArray = new Object[max];
@@ -17,11 +18,9 @@ public class StackImpl implements Stack {
 
     @Override
     public void clear() {
-        for (int i = 0; i < stackArray.length; i++) {
-            stackArray[i] = null;
-        }
-        count=0;
-        
+        final Object[] es = stackArray;
+        for (int to = count, i = count = 0; i < to; i++)
+            es[i] = null;
     }
 
     @Override
@@ -51,19 +50,19 @@ public class StackImpl implements Stack {
     public void push(Object element) {
         stackArray[count] = element;
         count++;
-        
+
     }
 
     @Override
     public Object pop() {
         Object obj;
 
-        int len = size();
-        obj=top();
-        int j = count - (len-1) - 1;
-        if (j > 0) {
-            System.arraycopy(stackArray, (len-1) + 1, stackArray, len-1, j);
-        }
+        //int len = size();
+        obj = top();
+        //int j = count - (len - 1) - 1;
+        //if (j > 0) {
+            //System.arraycopy(stackArray, len, stackArray, len - 1, j);
+        //}
 
         count--;
         stackArray[count] = null;
@@ -72,7 +71,10 @@ public class StackImpl implements Stack {
 
     @Override
     public Object top() {
-        return stackArray[count-1];
+        int     len = size();
+        if (len == 0)
+            return null;
+        return stackArray[count - 1];
     }
 
     @Override
@@ -80,9 +82,10 @@ public class StackImpl implements Stack {
         StringBuilder s = new StringBuilder();
         s.append("[");
         for (int i = 0; i < stackArray.length; i++) {
-            if (i==stackArray.length-1) {
-               s.append(stackArray[stackArray.length - 1]);
-               break;}
+            if (i == stackArray.length - 1) {
+                s.append(stackArray[stackArray.length - 1]);
+                break;
+            }
             s.append(stackArray[i] + ", ");
         }
         s.append("]");
@@ -90,7 +93,7 @@ public class StackImpl implements Stack {
     }
 
     public static void main(String[] args) {
-        StackImpl stack=new StackImpl();
+        StackImpl stack = new StackImpl();
         stack.push(34);
         stack.push(56);
         stack.push(78);
@@ -103,9 +106,6 @@ public class StackImpl implements Stack {
         System.out.println(stack.top());
         stack.clear();
         System.out.println(stack);
-
-
-
 
 
     }

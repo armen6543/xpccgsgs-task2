@@ -117,7 +117,7 @@ public class StackImpl implements Stack {
     }
 
     public static void main(String[] args) {
-        StackImpl stack = new StackImpl();
+        StackImpl stack = new StackImpl(4);
         stack.push(34);
         stack.push(56);
         stack.push(78);

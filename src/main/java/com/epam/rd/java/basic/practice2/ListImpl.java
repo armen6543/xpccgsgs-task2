@@ -50,24 +50,25 @@ public class ListImpl implements List {
     }
 
     private class IteratorImpl implements Iterator<Object> {
-        private ListImpl.Node lastReturned;
-        private ListImpl.Node next;
-        private int nextIndex;
+
+        Node current = first;
 
         @Override
         public boolean hasNext() {
-            return nextIndex < count;
+            return current != null;
+
         }
 
         @Override
         public Object next() {
-            if (!hasNext())
-                throw new NoSuchElementException();
 
-            lastReturned = next;
-            next = next.next;
-            nextIndex++;
-            return lastReturned.element;
+            if (hasNext()) {
+                Object data = current.element;
+                current = current.next;
+                return data;
+            }
+            return null;
+
         }
 
     }
@@ -154,13 +155,13 @@ public class ListImpl implements List {
 
         int index = 0;
         if (element == null) {
-            for (ListImpl.Node  x = first; x != null; x = x.next) {
+            for (ListImpl.Node x = first; x != null; x = x.next) {
                 if (x.element == null)
                     return index;
                 index++;
             }
         } else {
-            for (ListImpl.Node  x = first; x != null; x = x.next) {
+            for (ListImpl.Node x = first; x != null; x = x.next) {
                 if (element.equals(x.element))
                     return x.element;
                 index++;
@@ -251,10 +252,14 @@ public class ListImpl implements List {
         list.remove(23);
         System.out.println(list);
         System.out.println(list.size());
-        list.clear();
-        System.out.println(list);
-        System.out.println(list.getFirst());
-        System.out.println(list.getLast());
+        //ist.clear();
+        //System.out.println(list);
+        //System.out.println(list.getFirst());
+       // System.out.println(list.getLast());
+        Iterator<Object> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
 
+        }
     }
 }

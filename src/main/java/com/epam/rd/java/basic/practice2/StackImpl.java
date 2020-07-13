@@ -63,8 +63,16 @@ public class StackImpl implements Stack {
 
     @Override
     public void push(Object element) {
-        stackArray[count] = element;
-        count++;
+
+        if (count < stackArray.length) {
+            this.stackArray[count] = element;
+            count++;
+        } else if (count == stackArray.length) {
+            Object[] arr2 = new Object[stackArray.length + 1];
+            System.arraycopy(stackArray, 0, arr2, 0, stackArray.length);
+            arr2[arr2.length - 1] = element;
+            stackArray = arr2;
+            count++;}
 
     }
 
@@ -123,6 +131,12 @@ public class StackImpl implements Stack {
         for (Object o : stack) {
             System.out.print((o)+" ");
         }
+        System.out.println();
+        //stack.push(73);
+        //stack.push(65);
+        System.out.println(stack);
+        System.out.println(stack);
+
 
 
     }

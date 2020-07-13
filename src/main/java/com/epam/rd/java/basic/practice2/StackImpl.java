@@ -8,7 +8,7 @@ public class StackImpl implements Stack {
     private int count;
 
     public StackImpl() {
-        this.stackArray = new Object[10];
+        this.stackArray = new Object[4];
         this.count = 0;
     }
 
@@ -70,13 +70,15 @@ public class StackImpl implements Stack {
 
     @Override
     public Object pop() {
-        Object obj;
-
-        obj = top();
+        Object obj = top();
+        int     len = size();
+        if (len == 0)
+            return null;
 
         count--;
         stackArray[count] = null;
         return obj;
+
     }
 
     @Override
@@ -89,17 +91,7 @@ public class StackImpl implements Stack {
 
     @Override
     public String toString() {
-       // StringBuilder s = new StringBuilder();
-       //// s.append("[");
-       // for (int i = 0; i < stackArray.length; i++) {
-           // if (i == stackArray.length - 1) {
-              //  s.append(stackArray[stackArray.length - 1]);
-               // break;
-           // }
-          //  s.append(stackArray[i] + ", ");
-      //  }
-       // s.append("]");
-       // return s.toString();
+
         if (stackArray == null)
             return "null";
         int iMax = stackArray.length - 1;

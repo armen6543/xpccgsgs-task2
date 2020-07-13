@@ -103,7 +103,6 @@ public class ListImpl implements List {
         final ListImpl.Node f = first;
         if (f == null)
             throw new NoSuchElementException();
-        final Object element = f.element;
         final ListImpl.Node next = f.next;
         f.element = null;
         f.next = null;

@@ -24,11 +24,15 @@ public class QueueImpl implements Queue {
 
     @Override
     public void clear() {
-        Iterator it = iterator();
-        while (it.hasNext()) {
-            it.next();
-            it.remove();
+
+        for (QueueImpl.QNode x = head; x != null; ) {
+            QueueImpl.QNode next = x.next;
+            x.object = null;
+            x.next = null;
+            x = next;
         }
+        head = tail = null;
+        count = 0;
 
     }
 
@@ -88,6 +92,7 @@ public class QueueImpl implements Queue {
             tail = null;
         } else {
             oldHead.next = null;
+            count--;
         }
         return retval;
     }
@@ -118,15 +123,22 @@ public class QueueImpl implements Queue {
         QueueImpl queue = new QueueImpl();
         queue.enqueue(34);
         queue.enqueue(56);
+        System.out.println(queue);
+        queue.dequeue();
 
-        //System.out.println(queue);
-       // System.out.println(queue.size());
-        //System.out.println(queue.top());
+        System.out.println(queue);
+        System.out.println(queue.size());
+        System.out.println(queue.top());
+        queue.enqueue(89);
         Iterator<Object> iterator = queue.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
 
         }
+        System.out.println(queue);
+        System.out.println(queue.top());
+        queue.clear();
+        System.out.println(queue);
 
     }
 }

@@ -116,7 +116,6 @@ public class ArrayImpl implements Array {
     public void remove(int index) {
         final Object[] es = data;
 
-        Object oldValue = (Object) es[index];
         final int newSize;
         if ((newSize = count - 1) > index)
             System.arraycopy(es, index + 1, es, index, newSize -index);

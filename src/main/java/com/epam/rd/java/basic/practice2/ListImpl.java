@@ -120,7 +120,6 @@ public class ListImpl implements List {
         final ListImpl.Node l = last;
         if (l == null)
             throw new NoSuchElementException();
-        final Object element = l.element;
         final ListImpl.Node prev = l.previous;
         l.element = null;
         l.previous = null;
@@ -200,7 +199,6 @@ public class ListImpl implements List {
         } else {
             for (ListImpl.Node x = first; x != null; x = x.next) {
                 if (element.equals(x.element)) {
-                    final Object el = x.element;
                     final ListImpl.Node next = x.next;
                     final ListImpl.Node prev = x.previous;
 

@@ -61,13 +61,12 @@ public class ListImpl implements List {
 
         @Override
         public Object next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
 
-            if (hasNext()) {
-                Object data = current.element;
-                current = current.next;
-                return data;
-            }
-            return null;
+            Object data = current.element;
+            current = current.next;
+            return data;
 
         }
 

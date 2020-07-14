@@ -1,6 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class QueueImpl implements Queue {
     private QNode head;
@@ -55,13 +56,12 @@ public class QueueImpl implements Queue {
 
         @Override
         public Object next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
 
-            if (hasNext()) {
-                Object data = current.object;
-                current = current.next;
-                return data;
-            }
-            return null;
+            Object data = current.object;
+            current = current.next;
+            return data;
         }
 
     }

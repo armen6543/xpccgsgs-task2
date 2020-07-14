@@ -80,7 +80,7 @@ public class ArrayImpl implements Array {
     public void set(int index, Object element) {
         if (index < count) {
             data[index] = element;
-        } else if (index >= count) {
+        } else {
             data[index] = element;
             count++;
         }
@@ -126,14 +126,21 @@ public class ArrayImpl implements Array {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("[");
-        for (int i = 0; i < data.length - 1; i++) {
-            s.append(data[i] + ", ");
+
+        if (data == null)
+            return "null";
+        int iMax = data.length - 1;
+        if (iMax == -1)
+            return "[]";
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; ; i++) {
+            b.append(data[i]);
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
         }
-        s.append(data[data.length - 1]);
-        s.append("]");
-        return s.toString();
     }
 
     public static void main(String[] args) {

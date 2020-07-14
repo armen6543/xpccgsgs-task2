@@ -1,6 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class StackImpl implements Stack {
     private Object[] stackArray;
@@ -47,6 +48,8 @@ public class StackImpl implements Stack {
         public Object next() {
 
             int i = cursor;
+            if (i >= count)
+                throw new NoSuchElementException();
 
             Object[] elementData = stackArray;
 
